@@ -1,5 +1,10 @@
 import dev from './dev';
 import prod from './prod';
+import { WinstonLoggerConfig } from '../shared/logger';
+
+export type AllConfigType = {
+  logger: WinstonLoggerConfig;
+};
 
 export const env = process.env.NODE_ENV || 'dev';
 
@@ -8,5 +13,5 @@ export const getConfig = () => {
     dev,
     prod,
   };
-  return evnMap[env];
+  return evnMap[env]() as AllConfigType;
 };
