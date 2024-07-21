@@ -8,7 +8,7 @@ import {
 import { Response } from 'express';
 
 @Catch(HttpException)
-export class HttpExceptionFilterFilter<T> implements ExceptionFilter {
+export class HttpExceptionFilter<T> implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
