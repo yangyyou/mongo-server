@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { AllConfigType } from 'src/config';
@@ -6,6 +6,7 @@ import { createLoggerTransports } from './logger';
 import { RedisService } from './redis/redis.service';
 import { RedisModule } from './redis/redis.module';
 
+@Global()
 @Module({
   imports: [
     WinstonModule.forRootAsync({

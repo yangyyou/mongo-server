@@ -18,6 +18,12 @@ export const getConfig = () =>
         url: 'redis://:secret_redis@localhost:6379/2',
       },
     ],
+    auth: {
+      access_secret: 'access_secret',
+      access_expire: '15m',
+      refresh_secret: 'refresh_secret',
+      refresh_expire: '7d',
+    },
   }) as AllConfigType;
 
 export default getConfig;

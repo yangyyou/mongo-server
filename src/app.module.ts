@@ -8,6 +8,11 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ResponseInterceptor } from './common/response/response.interceptor';
 import { HttpExceptionFilter } from './common/filter/http_exception.filter';
+import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { RolesModule } from './src/modules/roles/roles.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { MenuModule } from './modules/menu/menu.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,6 +23,9 @@ import { HttpExceptionFilter } from './common/filter/http_exception.filter';
     MikroOrmModule.forRoot(),
     SharedModule,
     UserModule,
+    AuthModule,
+    RolesModule,
+    MenuModule,
   ],
   controllers: [AppController],
   providers: [

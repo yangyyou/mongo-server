@@ -62,7 +62,7 @@ export class RedisService {
     } else {
       result = await client.set(key, value);
     }
-
+    this.logger.debug(`redis set key [${key}]:[${value}]`);
     return result === 'OK';
   }
 
@@ -89,7 +89,7 @@ export class RedisService {
       const matchArray = expire.match(/(\d+)([mhd])/);
       if (!matchArray) {
         this.logger.warn(
-          `redis [${name}] set expire error: invalid ttl: ${expire}`,
+          `redis [${name}] set expire error: invalid ttl [${expire}]`,
         );
         return false;
       }
@@ -105,8 +105,15 @@ export class RedisService {
     }
     const ret = await client.expire(key, seconds);
     if (ret != 1) {
-      this.logger.log(`redis [${name}] set expire fail`);
+      this.logger.warn(`redis [${name}] set expire fail`);
     }
+    this.logger.debug(`redis setEx:[${key}] exp:[${expire}]`);
     return true;
+  }
+
+  async del(key: string, name = REDIS_CLIENT_DEFAULT) {
+    const redisCli = this.clients.get(name);
+    this.logger.debug(`redis del: [${key}]`);
+    return redisCli.del(key);
   }
 }
