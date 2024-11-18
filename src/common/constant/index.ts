@@ -1,8 +1,11 @@
-
 /** redis cache define */
-export const REDIS_KEY_USER_TOKEN ='user:refresh_token:';
+export const REDIS_KEY_USER_TOKEN = 'user:refresh_token:';
 export const REDIS_KEY_USER_ROLE = 'user:roles:';
 export const REDIS_KEY_ROLE_MENU = 'permission:role:menu';
+
+/** decorator define */
+export const PUBLIC_DECORATOR = 'public';
+export const REFRESH_DECORATOR = 'refresh';
 
 /**
  * 定义用户类型，

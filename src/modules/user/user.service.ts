@@ -35,4 +35,10 @@ export class UserService {
     if (!foundUser) throw new ForbiddenException('未登录');
     return this.authSer.refreshToken(userId, username, refresh_token);
   }
+
+  async create(dto: CreateUserDto) {
+    const user = new User();
+    user.assign(dto);
+    this.userRepo.persistAndFlush(user);
+  }
 }

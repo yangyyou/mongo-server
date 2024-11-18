@@ -11,7 +11,7 @@ export class User extends BaseEntity {
   password!: string;
 
   @Enum(() => USER_TYPE)
-  type = USER_TYPE;
+  type!: USER_TYPE;
 
   @Property()
   email!: string;

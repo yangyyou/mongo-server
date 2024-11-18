@@ -116,4 +116,9 @@ export class RedisService {
     this.logger.debug(`redis del: [${key}]`);
     return redisCli.del(key);
   }
+
+  async get(key: string, name = REDIS_CLIENT_DEFAULT) {
+    const redisCli = this.clients.get(name);
+    return redisCli.get(key);
+  }
 }

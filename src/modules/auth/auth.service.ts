@@ -21,6 +21,12 @@ export class AuthService {
     private readonly jwtSer: JwtService,
   ) {}
 
+  /**
+   * create refresh token and access token
+   * @param userId user id
+   * @param username user name
+   * @returns refresh token and access token
+   */
   async createTokens(userId: number, username: string) {
     const authConf = this.configSer.get('auth', { infer: true });
     const access_token = await this.jwtSer.signAsync(
@@ -41,6 +47,13 @@ export class AuthService {
     return { access_token, refresh_token };
   }
 
+  /**
+   * use refresh token to get new tokens
+   * @param userId user id
+   * @param username user name
+   * @param refreshToken refresh token
+   * @returns new access token and refresh token
+   */
   async refreshToken(userId: number, username: string, refreshToken: string) {
     // check redis cache
     const redisCli = this.redisSer.getRedisClient();
@@ -51,6 +64,12 @@ export class AuthService {
     return this.createTokens(userId, username);
   }
 
+  /**
+   * update refresh token in redis cache
+   * @param userId user id
+   * @param refresh_token refresh token
+   * @returns boolean ret
+   */
   async cacheUpdateToken(
     userId: number,
     refresh_token: string,
@@ -64,6 +83,11 @@ export class AuthService {
     return true;
   }
 
+  /**
+   * delete redis cache refresh token
+   * @param userId user id
+   * @returns ret
+   */
   async deleteTokenCache(userId: number) {
     return await this.redisSer.del(REDIS_KEY_USER_TOKEN + userId);
   }

@@ -17,32 +17,32 @@ export abstract class BaseEntity extends MikroBaseEntity {
   enable = true;
 
   /**
-   * 创建着
+   * 简介
    */
   @Property()
+  remark?: string;
+
+  /**
+   * 创建者
+   */
+  @Property({ lazy: true })
   createdBy = DEFAULT_DB_USER;
 
   /**
    * 创建时间
    */
-  @Property()
+  @Property({ lazy: true })
   createdAt = new Date();
 
   /**
    * 最后更新用户
    */
-  @Property()
+  @Property({ lazy: true })
   updatedBy = DEFAULT_DB_USER;
 
   /**
    * 最后更新时间
    */
-  @Property({ onUpdate: () => new Date() })
+  @Property({ onUpdate: () => new Date(), lazy: true })
   updatedAt = new Date();
-
-  /**
-   * 简介
-   */
-  @Property()
-  remark?: string;
 }
