@@ -31,6 +31,7 @@ const config: Options = {
   // tsNode: true,
 
   /**
+   *
    * debug option
    */
   debug: true,
@@ -41,11 +42,21 @@ const config: Options = {
    */
   migrations: {
     tableName: 'orm_migrations',
-    path: __dirname + '/../src/common/migrations',
-    pathTs: __dirname + '/../dist/common/migrations',
+    path: __dirname + '/../src/common/database/migrations',
+    pathTs: __dirname + '/../dist/common/database/migrations',
     emit: 'ts',
     glob: '!(*.d).{js,ts}',
     generator: TSMigrationGenerator,
+  },
+
+  /**
+   * seeder option
+   */
+  seeder: {
+    path: __dirname + '/../dist/common/database/seeders',
+    pathTs: __dirname + '/../src/common/database/seeders',
+    emit: 'ts',
+    glob: '!(*.d).{js,ts}',
   },
 
   /**
